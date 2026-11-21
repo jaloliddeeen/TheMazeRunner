@@ -11,7 +11,7 @@ import SwiftUI
 struct TheMazeRunnerApp: App {
     var body: some Scene {
         WindowGroup {
-            MazeRunnerMain()
+            TheMazeRunnerRoot()
         }
     }
 }
