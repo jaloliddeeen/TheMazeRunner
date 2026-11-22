@@ -10,39 +10,76 @@ import SwiftUI
 struct TheMazeRunnerRoot: View {
     @State private var selectedTab: AppTab = .home
     
+    @State private var currentAlertStep: MazeAlertStep? = nil
+    
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 0) {
-                Group {
-                    switch selectedTab {
-                    case .home:
-                        MazeRunnerMain()
-                    case .greenies:
-                        GreeniesView()
+        ZStack {
+            NavigationStack {
+                VStack(spacing: 0) {
+                    HStack(alignment: .center) {
+                        Text("Hello runner")
+                            .font(.title2.bold())
+                            .foregroundColor(.white)
+                        
+                        Spacer()
+                        
+                        Text("Day 1044")
+                            .font(.body)
+                            .foregroundColor(MazeTheme.textMuted)
                     }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 6)
+                    .padding(.bottom, 12)
+                    .background(MazeTheme.headerBackground)
+                    .background(MazeTheme.headerBackground.ignoresSafeArea(edges: .top))
+                    
+                    Group {
+                        switch selectedTab {
+                        case .home:
+                            MazeRunnerMain()
+                        case .greenies:
+                            GreeniesView()
+                        }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(MazeTheme.backgroundDark)
+                    
+                    // Bottom Tab Bar
+                    CustomTabBar1(selectedTab: $selectedTab)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(MazeTheme.backgroundDark)
-                
-                CustomTabBar1(selectedTab: $selectedTab)
+                .toolbar(.hidden, for: .navigationBar)
             }
-            .background(MazeTheme.backgroundDark)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("Hello runner")
-                        .font(.title2.bold())
-                        .foregroundColor(.white)
-                }
-                
-                ToolbarItem(placement: .topBarTrailing) {
-                    Text("Day 1044")
-                        .font(.body)
-                        .foregroundColor(MazeTheme.textMuted)
-                }
+            if let step = currentAlertStep {
+                MazeAlertView(step: step)
+                    .id(step)
+                    .ignoresSafeArea()
+                    .zIndex(999)
             }
-            .toolbarBackground(MazeTheme.headerBackground, for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
-            .toolbarColorScheme(.dark, for: .navigationBar)
+        }
+        .task {
+            await runAlertSequence()
+        }
+    }
+    
+    private func runAlertSequence() async {
+        try? await Task.sleep(for: .seconds(5))
+        
+        for step in MazeAlertStep.allCases {
+            withAnimation(.easeInOut(duration: 0.45)) {
+                currentAlertStep = step
+            }
+            
+            if step == .completed {
+                try? await Task.sleep(for: .seconds(3))
+            } else {
+                try? await Task.sleep(for: .seconds(3))
+            }
+        }
+        
+        withAnimation(.easeOut(duration: 2)) {
+            selectedTab = .home
+            currentAlertStep = nil
         }
     }
 }

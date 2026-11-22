@@ -15,6 +15,7 @@
 		485B36BE30B0AF8300DA5E4D /* MazeComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B36BD30B0AF8300DA5E4D /* MazeComponentView.swift */; };
 		48A0ED2630B0BF5200E10D28 /* GreeniesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED2530B0BF5200E10D28 /* GreeniesView.swift */; };
 		48A0ED2830B179FB00E10D28 /* TheMazeRunnerRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED2730B179FB00E10D28 /* TheMazeRunnerRoot.swift */; };
+		48A0ED2A30B18ADE00E10D28 /* MazeAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A0ED2930B18ADE00E10D28 /* MazeAlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		485B36BD30B0AF8300DA5E4D /* MazeComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeComponentView.swift; sourceTree = "<group>"; };
 		48A0ED2530B0BF5200E10D28 /* GreeniesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreeniesView.swift; sourceTree = "<group>"; };
 		48A0ED2730B179FB00E10D28 /* TheMazeRunnerRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMazeRunnerRoot.swift; sourceTree = "<group>"; };
+		48A0ED2930B18ADE00E10D28 /* MazeAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeAlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +51,7 @@
 				485B36BD30B0AF8300DA5E4D /* MazeComponentView.swift */,
 				485B36BB30B0AD3600DA5E4D /* MazeRunnerMain.swift */,
 				48A0ED2530B0BF5200E10D28 /* GreeniesView.swift */,
+				48A0ED2930B18ADE00E10D28 /* MazeAlertView.swift */,
 				485B36A230ADDE6A00DA5E4D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -132,6 +135,7 @@
 				485B36BA30B0AAC700DA5E4D /* CustomTabBar1.swift in Sources */,
 				485B36BE30B0AF8300DA5E4D /* MazeComponentView.swift in Sources */,
 				485B36BC30B0AD3600DA5E4D /* MazeRunnerMain.swift in Sources */,
+				48A0ED2A30B18ADE00E10D28 /* MazeAlertView.swift in Sources */,
 				48A0ED2830B179FB00E10D28 /* TheMazeRunnerRoot.swift in Sources */,
 			);
 		};
