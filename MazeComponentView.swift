@@ -60,25 +60,29 @@ struct MazeComponentView: View {
                         }
                     }
                     .fill(MazeTheme.mazeWall)
+                    
+                    Text("YOU ARE HERE")
+                        .font(.title3)
+                        .bold()
+                        .foregroundColor(MazeTheme.badgeText)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .background(Color.white)
+                        .shadow(color: Color.black.opacity(0.4), radius: 6, x: 0, y: 3)
                 }
                 .frame(width: side, height: side)
+                .overlay(Rectangle().stroke(MazeTheme.mazeWall, lineWidth: 3))
                 .position(x: geo.size.width / 2, y: geo.size.height / 2)
             }
-            
-            Text("YOU ARE HERE")
-                .font(.title3)
-                .bold()
-                .foregroundColor(MazeTheme.badgeText)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .background(Color.white)
-                .shadow(color: Color.black.opacity(0.4), radius: 6, x: 0, y: 3)
         }
         .aspectRatio(1.0, contentMode: .fit)
-        .overlay(Rectangle().stroke(MazeTheme.mazeWall, lineWidth: 3))
     }
 }
 
 #Preview {
-    MazeComponentView()
+    ZStack {
+        MazeTheme.backgroundDark.ignoresSafeArea()
+        MazeComponentView()
+            .frame(width: 320, height: 320)
+    }
 }

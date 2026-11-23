@@ -10,6 +10,7 @@ import SwiftUI
 struct TheMazeRunnerRoot: View {
     @State private var selectedTab: AppTab = .home
     
+    @State private var isAlertActive: Bool = false
     @State private var currentAlertStep: MazeAlertStep? = nil
     
     var body: some View {
@@ -50,12 +51,11 @@ struct TheMazeRunnerRoot: View {
                 .background(MazeTheme.backgroundDark)
                 .toolbar(.hidden, for: .navigationBar)
             }
-            if let step = currentAlertStep {
-                MazeAlertView(step: step)
-                    .id(step)
+            if isAlertActive {
+                MazeAlertView(step: currentAlertStep!)
                     .ignoresSafeArea()
                     .zIndex(999)
-                    .transition(.opacity)
+                    .transition(.opacity) // Only fades in at t=7s and fades out at the end
             }
         }
         .task {
@@ -66,22 +66,34 @@ struct TheMazeRunnerRoot: View {
     private func runAlertSequence() async {
         try? await Task.sleep(for: .seconds(5))
         
-        for step in MazeAlertStep.allCases {
-            withAnimation(.easeInOut(duration: 0.45)) {
-                currentAlertStep = step
-            }
-            
-            if step == .completed {
-                try? await Task.sleep(for: .seconds(3))
-            } else {
-                try? await Task.sleep(for: .seconds(3))
-            }
+        withAnimation(.easeIn(duration: 0.3)) {
+            currentAlertStep = .ready
+            isAlertActive = true
+        }
+        try? await Task.sleep(for: .seconds(4))
+        
+        withAnimation(.easeInOut(duration: 0.35)) {
+            currentAlertStep = .survive
         }
         
-        withAnimation(.easeOut(duration: 2)) {
-            selectedTab = .home
-            currentAlertStep = nil
+        try? await Task.sleep(for: .seconds(4))
+        
+        withAnimation(.easeInOut(duration: 0.35)) {
+            currentAlertStep = .keepRunning
         }
+        try? await Task.sleep(for: .seconds(4))
+        //
+        withAnimation(.easeInOut(duration: 0.4)) {
+            currentAlertStep = .completed
+        }
+        try? await Task.sleep(for: .seconds(4))
+        //
+        withAnimation(.easeInOut(duration: 2)) {
+            selectedTab = .home
+            isAlertActive = false
+        }
+        
+        
     }
 }
 
