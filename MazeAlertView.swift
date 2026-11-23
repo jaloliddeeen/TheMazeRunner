@@ -74,6 +74,7 @@ struct MazeAlertView: View {
         ZStack {
             step.backgroundColor
                 .ignoresSafeArea()
+                .animation(.easeInOut(duration: 0.5), value: step.backgroundColor)
             
             VStack(spacing: 28) {
                 ZStack {
@@ -93,11 +94,13 @@ struct MazeAlertView: View {
                     .padding(.horizontal, 32)
                     .lineSpacing(4)
             }
+            .id(step)
+            .transition(.asymmetric(
+                insertion: .opacity.combined(with: .scale(scale: 0.96)),
+                removal: .opacity
+            ))
         }
-        .transition(.asymmetric(
-            insertion: .opacity.combined(with: .scale(scale: 0.96)),
-            removal: .opacity
-        ))
+        .ignoresSafeArea()
     }
 }
 

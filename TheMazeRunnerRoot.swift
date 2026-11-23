@@ -55,6 +55,7 @@ struct TheMazeRunnerRoot: View {
                     .id(step)
                     .ignoresSafeArea()
                     .zIndex(999)
+                    .transition(.opacity)
             }
         }
         .task {
